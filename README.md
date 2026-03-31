@@ -1,5 +1,5 @@
 
-# Vietnamese Address Parsing — Advanced Algorithms (Group 22)
+# Vietnamese Address Parsing — Advanced Algorithms
 
 **Goal:** Extract **Province**, **District**, and **Ward** from free‑text Vietnamese addresses using **algorithmic techniques (no ML)** with a target average latency of **≤ 0.04 s/request**. citeturn1search1
 
