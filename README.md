@@ -3,8 +3,6 @@
 
 **Goal:** Extract **Province**, **District**, and **Ward** from free‑text Vietnamese addresses using **algorithmic techniques (no ML)** with a target average latency of **≤ 0.04 s/request**. citeturn1search1
 
-> This README is distilled from the presentation deck *“AA‑Assignment Mr. TA – Group_22”* and captures the problem, approach, and limitations for quick onboarding. citeturn1search1
-
 ---
 
 ## 1) Problem Statement
