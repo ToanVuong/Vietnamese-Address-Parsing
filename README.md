@@ -115,7 +115,7 @@ python src/main.py --input "357/28 Ng T Thuật, P.1, Q.3, TP.HCM"
 # → Ward: Phường 1 | District: Quận 3 | Province: TP. Hồ Chí Minh
 ```
 
-> **Note:** Dictionaries of official Vietnamese administrative units are required to build the tries. *(Add your curated CSV/JSON sources here.)*
+> **Note:** Dictionaries of official Vietnamese administrative units are required to build the tries. 
 
 ---
 
