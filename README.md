@@ -1,7 +1,7 @@
 
 # Vietnamese Address Parsing — Advanced Algorithms
 
-**Goal:** Extract **Province**, **District**, and **Ward** from free‑text Vietnamese addresses using **algorithmic techniques (no ML)** with a target average latency of **≤ 0.04 s/request**. citeturn1search1
+**Goal:** Extract **Province**, **District**, and **Ward** from free‑text Vietnamese addresses using **algorithmic techniques (no ML)** with a target average latency of **≤ 0.04 s/request**. 
 
 ---
 
@@ -10,14 +10,14 @@
 - **Output:** The best‑matched administrative triplet **(Ward/Commune, District, Province/City)**.
 - **Constraints:**
   - Must **not** use machine learning.
-  - Aim for **≤ 0.04 s/request** on average. citeturn1search1
+  - Aim for **≤ 0.04 s/request** on average. 
 
 ### Address Variants Covered (from slides)
 - Fully spelled and in order, optional prefixes.  
 - In‑order but with **spelling errors** in name or prefix.  
 - Contains **extra components** (street, alley, etc.).  
 - **Missing** one or more of W/D/P.  
-- **Abbreviations** in names and prefixes (e.g., *TP.HCM, HN, P., Q., TT, TX*). citeturn1search1
+- **Abbreviations** in names and prefixes (e.g., *TP.HCM, HN, P., Q., TT, TX*).
 
 ---
 
@@ -28,20 +28,20 @@ We combine **string normalization**, **n‑gram preprocessing**, and **three spe
 - Lowercasing, diacritic handling/normalization, whitespace cleanup. *(Implementation detail for this repo — not explicitly in slides but required for robust matching.)*
 
 ### 2.2 Trie Construction (×3 per level)
-1) **Correct‑spelling trie**: Prefix + normalized location (e.g., *Huyện*, *Thành Phố*; abbreviations like *H, TP, X, TT, Tpho, Txa, Ttran* are handled). Numeric wards are paired with their prefix (e.g., *P.1*, *P.2*). citeturn1search1
+1) **Correct‑spelling trie**: Prefix + normalized location (e.g., *Huyện*, *Thành Phố*; abbreviations like *H, TP, X, TT, Tpho, Txa, Ttran* are handled). Numeric wards are paired with their prefix (e.g., *P.1*, *P.2*).
 2) **Incorrect‑spelling trie**: From correct entries, generate single‑edit variants using an alphabet `abcdefghijklmnopqrstuvwxyz0123456789` with operations:  
    - **Substitute:** ~35×n variants  
    - **Delete:** n variants  
    - **Add:** (n+1)×36 variants  
-   *(Only for tokens with 3–19 chars).* citeturn1search1
-3) **Abbreviation trie**: Allows first‑letter and last‑word abbreviations (e.g., **HCM**, **HN**, **HCMinh**, **HNoi**). citeturn1search1
+   *(Only for tokens with 3–19 chars).*
+3) **Abbreviation trie**: Allows first‑letter and last‑word abbreviations (e.g., **HCM**, **HN**, **HCMinh**, **HNoi**).
 
 ### 2.3 n‑gram Preprocessing
-- Longest location name in the database is **4 words**, so we search up to **4‑grams** and match **longest substrings first**. citeturn1search1
+- Longest location name in the database is **4 words**, so we search up to **4‑grams** and match **longest substrings first**.
 
 ### 2.4 Matching Strategy
 - Apply **longest‑match‑first** across n‑grams against the three tries.  
-- Enforce or infer **W → D → P** ordering where possible and resolve conflicts by score/priority. *(Scoring details can be tuned in code.)* citeturn1search1
+- Enforce or infer **W → D → P** ordering where possible and resolve conflicts by score/priority. *(Scoring details can be tuned in code.)*
 
 ---
 
@@ -65,7 +65,7 @@ for each input_address:
 
     return assemble_result(w, d, p)
 ```
-*(Structure derived from “Pseudocode / Build Trie / n‑gram / Matching strategy” slides.)* citeturn1search1
+*(Structure derived from “Pseudocode / Build Trie / n‑gram / Matching strategy” slides.)*
 
 ---
 
@@ -73,14 +73,14 @@ for each input_address:
 **Known limitations:**
 - Misses cases with **>1 character** spelling error in a token.  
 - Cannot reliably distinguish **single‑character differences** in similar names (e.g., *Vũ Ninh* vs *Võ Ninh*).  
-- Diacritic‑only differences (e.g., *Thạnh Hóa* vs *Thanh Hóa*) are hard to separate without extra heuristics. citeturn1search1
+- Diacritic‑only differences (e.g., *Thạnh Hóa* vs *Thanh Hóa*) are hard to separate without extra heuristics. 
 
 ---
 
 ## 5) Project Plan (from slides)
 - **Week 1–2:** Problem definition, solution design, pick algorithms.  
 - **Week 3:** Implement, build tries, n‑gram logic.  
-- **Week 4:** Error checking, improvements (accuracy, average runtime), finalize, test list. citeturn1search1
+- **Week 4:** Error checking, improvements (accuracy, average runtime), finalize, test list.
 
 ---
 
@@ -91,7 +91,7 @@ for each input_address:
 - **Nguyen Thanh Nhan** — Idea · Implement · Slide (17.5%)  
 - **Pham Toan Vuong** — Idea · Implement · Slide (17.5%)  
 - **Pham Le Trong Bang** — Idea (12.5%)  
-*(Names & contributions per slide.)* citeturn1search1
+*(Names & contributions per slide.)*
 
 ---
 
@@ -128,5 +128,5 @@ python src/main.py --input "357/28 Ng T Thuật, P.1, Q.3, TP.HCM"
 ---
 
 ## 9) Acknowledgements
-This README summarizes the team’s slide content for quick handover and implementation. citeturn1search1
+This README summarizes the team’s slide content for quick handover and implementation.
 
